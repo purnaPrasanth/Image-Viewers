@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/baseandroid" />
             <option value="$PROJECT_DIR$/cache" />
             <option value="$PROJECT_DIR$/httpclient" />
             <option value="$PROJECT_DIR$/image_loader_android" />

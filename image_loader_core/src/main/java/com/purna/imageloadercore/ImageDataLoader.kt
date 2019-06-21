@@ -19,7 +19,7 @@ public class ImageDataLoader(
         withContext(dispatcher) {
             try {
                 return@withContext httpClient.getValues(url)
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 throw e
             }
         }
