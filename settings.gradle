@@ -1,1 +1,1 @@
-include ':app', ':httpclient', ':image_loader_core', ':image_loader_android', ':cache', ':base', ':baseandroid'
+include ':app', ':httpclient', ':base', ':baseandroid', ':unsplashdatasource', ':imageloader', ':data'

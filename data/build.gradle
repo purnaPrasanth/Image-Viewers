@@ -1,9 +1,15 @@
 apply plugin: 'java-library'
+
 apply plugin: 'kotlin'
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(":unsplashdatasource")
     implementation project(":base")
-    implementation project(":httpclient")
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
+
+    testImplementation 'junit:junit:4.12'
 }

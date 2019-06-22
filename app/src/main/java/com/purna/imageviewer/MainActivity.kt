@@ -1,37 +1,37 @@
 package com.purna.imageviewer
 
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.purna.baseandroid.BaseActivity
-import com.purna.httpclient.HttpClient
+import com.purna.data.datasource.Error
+import com.purna.data.datasource.Success
 import com.purna.imageviewer.databinding.ActivityMainBinding
+import com.purna.imageviewer.ext.showShortToast
+import com.purna.imageviewer.generators.appDispatchersProvider
+import com.purna.imageviewer.generators.imageListRepo
 import kotlinx.coroutines.launch
-import org.json.JSONArray
-import java.net.URL
-import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val imageAdapter = ImagesRvAdapter(this)
 
     override fun initUI() {
-        val httpClient = HttpClient(ImageViewerApplication.appDispatchersProvider.getInstance().ioDispatcher)
-
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = imageAdapter
+        binding.recyclerView.addItemDecoration(VerticalSpaceItemDecoration(32))
 
-        launch(ImageViewerApplication.appDispatchersProvider.getInstance().commonDispatcher) {
-            val url =
-                URL("https://api.unsplash.com/photos/?client_id=f7af843e895c61a1f3434e6823743a08fb08ace46e203353f539a30eeb2a67e7&per_page=100")
+        launch(appDispatchersProvider.getInstance().ioDispatcher) {
 
-            val jsonObject = JSONArray(Scanner(httpClient.getValues(url)).useDelimiter("\\A").next())
-
-            val listOfUrl = (0 until jsonObject.length()).map { index ->
-                jsonObject.getJSONObject(index).getJSONObject("urls").getString("regular")
-            }
-
-            launch(ImageViewerApplication.appDispatchersProvider.getInstance().mainDispatcher) {
-                imageAdapter.setData(
-                    listOfUrl
-                )
+            when (val result = imageListRepo.getInstance().getImageList(0, 30)) {
+                is Success -> {
+                    launch(appDispatchersProvider.getInstance().mainDispatcher) {
+                        imageAdapter.setData(
+                            result.data.map { it.imageUrl }
+                        )
+                    }
+                }
+                is Error -> {
+                    result.exception.printStackTrace()
+                    showShortToast("Server Error")
+                }
             }
         }
     }
