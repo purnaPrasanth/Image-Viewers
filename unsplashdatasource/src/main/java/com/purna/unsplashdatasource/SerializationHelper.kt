@@ -13,12 +13,7 @@ fun <T> fromJson(serializer: KSerializer<T>, input: String): T {
     return json.parse(serializer, input)
 }
 
-fun <T> fromJsonToList(serializer: KSerializer<List<T>>, input: String): List<T> {
-    val json = Json(JsonConfiguration.Stable.copy(strictMode = false))
-    return json.parse(serializer, input)
-}
-
-fun <T> toJson(serializer: KSerializer<T>, input: T): Any {
+fun <T> toJson(serializer: KSerializer<T>, input: T): String {
     val json = Json(JsonConfiguration.Stable.copy(strictMode = false))
     return json.stringify(serializer, input)
 }

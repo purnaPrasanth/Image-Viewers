@@ -7,7 +7,7 @@ import com.purna.data.datasource.imagelist.ImageListDataSource
 import com.purna.data.datasource.imagelist.UnsplashImageListDataSource
 import com.purna.data.mappers.imagelist.UnsplashImageListToImageEntity
 import com.purna.data.repo.ImagesListRepo
-import com.purna.unsplashdatasource.DataSourceImpl
+import com.purna.unsplashdatasource.UnsplashImageListService
 
 /**
  * Created by Purna on 2019-06-22 as a part of Image-Viewers
@@ -21,8 +21,8 @@ val unsplashImageListToImageEntity: BaseGenerator<UnsplashImageListToImageEntity
     UnsplashImageListToImageEntity()
 }
 
-private val unsplashService: BaseGenerator<DataSourceImpl> = single {
-    DataSourceImpl(httpClient.getInstance(), appDispatchersProvider.getInstance())
+private val unsplashService: BaseGenerator<UnsplashImageListService> = single {
+    UnsplashImageListService(httpClient.getInstance(), appDispatchersProvider.getInstance())
 }
 
 private val unsplashDataSource: BaseGenerator<ImageListDataSource> = single {

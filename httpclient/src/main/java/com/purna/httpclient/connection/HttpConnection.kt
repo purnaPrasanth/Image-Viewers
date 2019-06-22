@@ -20,6 +20,8 @@ class HttpConnection(
     fun get(url: URL): String {
         val con = url.openConnection() as HttpURLConnection
 
+        println(url.toString())
+
         con.requestMethod = "GET"
 
         con.connectTimeout = connectTimeOut
