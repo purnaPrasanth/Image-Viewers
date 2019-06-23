@@ -1,26 +1,24 @@
 package com.purna.unsplashdatasource
 
-import com.purna.baseandroid.Dispatchers
 import com.purna.httpclient.HttpClient
 import com.purna.httpclient.exception.BadRequestException
 import com.purna.httpclient.exception.HttpException
 import com.purna.httpclient.exception.UnAuthorizedException
 import com.purna.unsplashdatasource.data.PhotoListItem
-import com.purna.unsplashdatasource.util.readJsonFromResource
+import com.purna.unsplashdatasource.utils.readJsonFromResource
 import kotlinx.coroutines.*
 import kotlinx.serialization.list
+import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.coroutines.CoroutineContext
-import okhttp3.mockwebserver.MockResponse
-import java.lang.Runnable
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by Purna on 2019-06-22 as a part of Image-Viewers
@@ -42,10 +40,10 @@ class UnSplashImageListServiceTest : CoroutineScope {
 
     lateinit var jsonData: String
 
-    private val dispatchers: Dispatchers by lazy {
-        Dispatchers(
-            ioDispatcher = kotlinx.coroutines.Dispatchers.IO,
-            commonDispatcher = kotlinx.coroutines.Dispatchers.Default,
+    private val dispatchers: com.purna.base.Dispatchers by lazy {
+        com.purna.base.Dispatchers(
+            ioDispatcher = Dispatchers.IO,
+            commonDispatcher = Dispatchers.Default,
             mainDispatcher = ThreadPoolExecutor(
                 1, 1,
                 0L, TimeUnit.MILLISECONDS,

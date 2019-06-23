@@ -1,6 +1,6 @@
 package com.purna.httpclient
 
-import com.purna.baseandroid.Dispatchers
+import com.purna.base.Dispatchers
 import com.purna.httpclient.connection.HttpConnection
 import com.purna.httpclient.connection.IHttpConnection
 import com.purna.httpclient.exception.DefaultExceptionMapper

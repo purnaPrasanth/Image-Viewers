@@ -1,8 +1,6 @@
 package com.purna.httpclient
 
-import com.purna.baseandroid.Dispatchers
-import com.purna.httpclient.connection.HttpConnection
-import com.purna.httpclient.exception.DefaultExceptionMapper
+import com.purna.base.Dispatchers
 import kotlinx.coroutines.asCoroutineDispatcher
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After

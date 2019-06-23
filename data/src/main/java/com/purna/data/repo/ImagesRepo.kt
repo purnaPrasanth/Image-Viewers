@@ -1,6 +1,6 @@
 package com.purna.data.repo
 
-import com.purna.baseandroid.Dispatchers
+import com.purna.base.Dispatchers
 import com.purna.data.datasource.imagelist.ImageListDataSource
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext

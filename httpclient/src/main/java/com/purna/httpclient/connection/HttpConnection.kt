@@ -22,8 +22,6 @@ class HttpConnection(
     override fun get(url: URL): String {
         val con = url.openConnection() as HttpURLConnection
 
-        println(url.toString())
-
         con.requestMethod = "GET"
 
         con.connectTimeout = connectTimeOut
@@ -47,8 +45,8 @@ class HttpConnection(
                 data.close()
             } catch (exception: Exception) {
                 when (exception) {
-                    is IOException -> {
-                        throw IOException("IO Exception While trying to connect $url").apply {
+                    is SocketTimeoutException -> {
+                        throw SocketTimeoutException("Socket Time Out While trying to connect $url").apply {
                             stackTrace = exception.stackTrace
                         }
                     }
@@ -57,8 +55,8 @@ class HttpConnection(
                             stackTrace = exception.stackTrace
                         }
                     }
-                    is SocketTimeoutException -> {
-                        throw SocketTimeoutException("Socket Time Out While trying to connect $url").apply {
+                    is IOException -> {
+                        throw IOException("IO Exception While trying to connect $url").apply {
                             stackTrace = exception.stackTrace
                         }
                     }

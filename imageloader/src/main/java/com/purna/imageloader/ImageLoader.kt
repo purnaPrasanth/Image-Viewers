@@ -3,7 +3,7 @@ package com.purna.imageloader
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.ImageView
-import com.purna.baseandroid.Dispatchers
+import com.purna.base.Dispatchers
 import com.purna.httpclient.HttpClient
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch

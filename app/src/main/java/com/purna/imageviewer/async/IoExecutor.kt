@@ -1,6 +1,6 @@
 package com.purna.imageviewer.async
 
-import com.purna.baseandroid.util.threadFactory
+import com.purna.base.util.threadFactory
 import java.util.concurrent.Executor
 import java.util.concurrent.SynchronousQueue
 import java.util.concurrent.ThreadPoolExecutor

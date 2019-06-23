@@ -1,7 +1,7 @@
 package com.purna.imageviewer.generators
 
-import com.purna.baseandroid.creational.BaseGenerator
-import com.purna.baseandroid.creational.single
+import com.purna.base.creational.BaseGenerator
+import com.purna.base.creational.single
 import com.purna.data.datasource.NetworkCallRunner
 import com.purna.data.datasource.imagelist.ImageListDataSource
 import com.purna.data.datasource.imagelist.UnsplashImageListDataSource

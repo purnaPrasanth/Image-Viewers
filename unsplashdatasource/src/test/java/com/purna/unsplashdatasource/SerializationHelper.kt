@@ -2,14 +2,12 @@ package com.purna.unsplashdatasource
 
 import com.purna.unsplashdatasource.data.ImageUrls
 import com.purna.unsplashdatasource.data.PhotoListItem
-import com.purna.unsplashdatasource.util.readJsonFromResource
+import com.purna.unsplashdatasource.utils.readJsonFromResource
 import kotlinx.serialization.list
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import java.io.BufferedReader
-import java.io.InputStreamReader
 
 /**
  * Created by Purna on 2019-06-22 as a part of Image-Viewers

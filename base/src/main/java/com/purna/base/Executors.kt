@@ -1,9 +1,9 @@
-package com.purna.baseandroid
+package com.purna.base
 
 import java.util.concurrent.Executor
 
 /**
- * Created by Purna on 2019-06-21 as a part of Image-Viewers
+ * Created by Purna on 2019-06-23 as a part of Image-Viewers
  **/
 data class Executors(
     val mainExecutor: Executor,

@@ -1,9 +1,9 @@
 package com.purna.imageviewer.generators
 
-import com.purna.baseandroid.Dispatchers
-import com.purna.baseandroid.Executors
-import com.purna.baseandroid.creational.BaseGenerator
-import com.purna.baseandroid.creational.single
+import com.purna.base.Dispatchers
+import com.purna.base.Executors
+import com.purna.base.creational.BaseGenerator
+import com.purna.base.creational.single
 import com.purna.imageviewer.async.AppExecutor
 import com.purna.imageviewer.async.CommonExecutor
 import com.purna.imageviewer.async.IoExecutor

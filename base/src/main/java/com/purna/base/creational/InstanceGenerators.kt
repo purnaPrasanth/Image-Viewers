@@ -1,14 +1,12 @@
-package com.purna.baseandroid.creational
+package com.purna.base.creational
 
 /**
- * Created by Purna on 2019-06-21 as a part of Image-Viewers
+ * Created by Purna on 2019-06-23 as a part of Image-Viewers
  **/
 
 interface BaseGenerator<T> {
     fun getInstance(): T
 }
-
-// TODO; Handle Params to Instances
 
 class single<T>(generatingBlock: () -> T) : BaseGenerator<T> {
     private val _instance: T by lazy { generatingBlock() }

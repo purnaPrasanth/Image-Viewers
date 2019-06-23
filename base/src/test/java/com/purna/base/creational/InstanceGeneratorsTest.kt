@@ -1,8 +1,12 @@
-package com.purna.baseandroid.creational
+package com.purna.base.creational
 
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+
+/**
+ * Created by Purna on 2019-06-23 as a part of Image-Viewers
+ **/
 
 @RunWith(JUnit4::class)
 class InstanceGeneratorsTest {

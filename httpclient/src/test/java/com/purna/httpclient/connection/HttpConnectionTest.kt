@@ -3,6 +3,7 @@ package com.purna.httpclient.connection
 import com.purna.httpclient.exception.BadRequestException
 import com.purna.httpclient.exception.DefaultExceptionMapper
 import com.purna.httpclient.exception.HttpException
+import com.purna.httpclient.util.readJsonFromResource
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -10,24 +11,24 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import java.lang.Exception
 import java.net.SocketTimeoutException
-import java.util.concurrent.TimeUnit
 
 @RunWith(JUnit4::class)
 class HttpConnectionTest {
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var httpConnection: HttpConnection
+    private lateinit var jsonData: String
 
     @Before
     fun before() {
         mockWebServer = MockWebServer()
         httpConnection = HttpConnection(
-            readTimeOut = 2000,
-            connectTimeOut = 2000,
+            readTimeOut = 1000,
+            connectTimeOut = 1000,
             exceptionMapper = DefaultExceptionMapper()
         )
+        jsonData = readJsonFromResource(javaClass)
         mockWebServer.start()
     }
 
@@ -60,15 +61,11 @@ class HttpConnectionTest {
     @Test
     fun testSocketTimeOut() {
         mockWebServer.enqueue(
-            MockResponse().throttleBody(
-                1024,
-                1,
-                TimeUnit.MILLISECONDS
-            )
+            MockResponse().setBody("ABC").setResponseCode(200).clearHeaders().addHeader("Content-Length: 4")
         )
 
         try {
-            val url = mockWebServer.url("")
+            val url = mockWebServer.url("photos")
             httpConnection.get(url.url())
             assert(false)
         } catch (exception: Exception) {

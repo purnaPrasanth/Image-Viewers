@@ -1,6 +1,6 @@
 package com.purna.unsplashdatasource
 
-import com.purna.baseandroid.Dispatchers
+import com.purna.base.Dispatchers
 import com.purna.httpclient.HttpClient
 import com.purna.unsplashdatasource.data.PhotoListItem
 import kotlinx.coroutines.coroutineScope
