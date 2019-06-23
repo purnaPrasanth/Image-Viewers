@@ -2,11 +2,15 @@ package com.purna.httpclient
 
 import com.purna.base.Dispatchers
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.runBlocking
+import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import java.io.InputStreamReader
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
@@ -38,7 +42,17 @@ class HttpClientTest {
             connectionTimeOut = 10000,
             readTimeOut = 10000
         ).build()
-        mockWebServer.start()
+    }
+
+    @Test
+    fun testMalGet() {
+        runBlocking {
+            mockWebServer.enqueue(MockResponse().setBody("Hello World").setResponseCode(200))
+
+            val value = InputStreamReader(httpClient.httpGet(mockWebServer.url("").url().toString())).readText()
+
+            assert(value == "Hello World")
+        }
     }
 
     @After
