@@ -5,3 +5,4 @@ package com.purna.unsplashdatasource
  **/
 
 val BASE_URL = "https://api.unsplash.com/"
+val clientId = "f7af843e895c61a1f3434e6823743a08fb08ace46e203353f539a30eeb2a67e7"

@@ -1,5 +1,8 @@
 package com.purna.httpclient.connection
 
+import com.purna.httpclient.exception.HttpException
+import com.purna.httpclient.exception.ICodeToExceptionMapper
+import com.purna.httpclient.exception.UnAuthorizedException
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
@@ -14,10 +17,11 @@ import java.net.UnknownServiceException
  **/
 class HttpConnection(
     private val readTimeOut: Int,
-    private val connectTimeOut: Int
-) {
+    private val connectTimeOut: Int,
+    private val exceptionMapper: ICodeToExceptionMapper
+) : IHttpConnection {
 
-    fun get(url: URL): String {
+    override fun get(url: URL): String {
         val con = url.openConnection() as HttpURLConnection
 
         println(url.toString())
@@ -29,7 +33,9 @@ class HttpConnection(
 
         val responseCode = con.responseCode
 
-        if (responseCode >= 200) {
+        val exception = exceptionMapper.mapCodeToException(responseCode)
+
+        if (exception == null) {
             val response = StringBuffer()
             try {
                 val data = BufferedReader(InputStreamReader(con.inputStream))
@@ -67,11 +73,11 @@ class HttpConnection(
             //print result
             return response.toString()
         } else {
-            throw Throwable("Error Response: $responseCode while connecting to $url")
+            throw exception.copy(url = url.toString())
         }
     }
 
-    fun getStream(url: URL): InputStream {
+    override fun getStream(url: URL): InputStream {
         val con = url.openConnection() as HttpURLConnection
 
         con.requestMethod = "GET"
@@ -81,7 +87,9 @@ class HttpConnection(
 
         val responseCode = con.responseCode
 
-        if (responseCode >= 200) {
+        val exception = exceptionMapper.mapCodeToException(responseCode)
+
+        if (exception == null) {
 
             try {
                 // optional default is GET
@@ -112,7 +120,7 @@ class HttpConnection(
                 }
             }
         } else {
-            throw Throwable("Error Response: $responseCode while connecting to $url")
+            throw exception.copy(url = url.toString())
         }
     }
 }

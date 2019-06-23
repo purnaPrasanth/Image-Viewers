@@ -17,14 +17,14 @@ class UnsplashImageListService(
 ) {
     suspend fun getPhotoUrls(page: Int, perPage: Int): List<PhotoListItem> = coroutineScope {
         withContext(dispatchers.ioDispatcher) {
-            val data = httpClient.httpGet(relativePath = "/photos") {
+            val data = httpClient.httpGet(relativePath = "photos") {
                 listOf(
                     Pair("page", page.toString()),
                     Pair("per_page", perPage.toString()),
-                    Pair("client_id", "f7af843e895c61a1f3434e6823743a08fb08ace46e203353f539a30eeb2a67e7")
+                    Pair("client_id", clientId)
                 )
             }
-            fromJson(PhotoListItem.serializer().list, data)
+            fromJson(PhotoListItem.serializer().list, data, emptyList())
         }
     }
 }

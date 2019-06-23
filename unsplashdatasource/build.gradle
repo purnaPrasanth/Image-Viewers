@@ -11,4 +11,5 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.1"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "com.squareup.okhttp3:mockwebserver:3.14.2"
 }

@@ -2,6 +2,8 @@ package com.purna.httpclient
 
 import com.purna.baseandroid.Dispatchers
 import com.purna.httpclient.connection.HttpConnection
+import com.purna.httpclient.connection.IHttpConnection
+import com.purna.httpclient.exception.DefaultExceptionMapper
 import com.purna.httpclient.requestbuilder.ParamsBuilder
 import com.purna.httpclient.requestbuilder.RequestBuilder
 import kotlinx.coroutines.coroutineScope
@@ -12,10 +14,10 @@ import java.net.URL
 /**
  * Created by Purna on 2019-06-20 as a part of Image-Viewers
  **/
-class HttpClient private constructor(
+class HttpClient constructor(
     private val dispatchers: Dispatchers,
     private val requestBuilder: RequestBuilder,
-    private val connection: HttpConnection
+    private val connection: IHttpConnection
 ) {
 
     suspend fun httpGet(relativePath: String, getParams: () -> List<Pair<String, String>>) = coroutineScope {
@@ -41,7 +43,8 @@ class HttpClient private constructor(
             requestBuilder = RequestBuilder(baseUrl, ParamsBuilder()),
             connection = HttpConnection(
                 readTimeOut = readTimeOut,
-                connectTimeOut = connectionTimeOut
+                connectTimeOut = connectionTimeOut,
+                exceptionMapper = DefaultExceptionMapper()
             )
         )
     }

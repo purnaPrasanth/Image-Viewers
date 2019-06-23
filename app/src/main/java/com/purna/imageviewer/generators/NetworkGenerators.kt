@@ -11,7 +11,7 @@ import com.purna.imageloader.ImageLoader
 
 val httpClient: BaseGenerator<HttpClient> = single {
     HttpClient.HttpClientBuilder(
-        "https://api.unsplash.com",
+        "https://api.unsplash.com/",
         appDispatchersProvider.getInstance(),
         connectionTimeOut = 15000,
         readTimeOut = 15000

@@ -2,6 +2,7 @@ package com.purna.unsplashdatasource
 
 import com.purna.unsplashdatasource.data.ImageUrls
 import com.purna.unsplashdatasource.data.PhotoListItem
+import com.purna.unsplashdatasource.util.readJsonFromResource
 import kotlinx.serialization.list
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +22,7 @@ class SerializationHelperTest {
 
     @Before
     fun before() {
-        jsonData = readJsonFromResource()
+        jsonData = readJsonFromResource(javaClass)
         listObjects = (1..20).map {
             PhotoListItem(
                 id = "abcd",
@@ -37,33 +38,34 @@ class SerializationHelperTest {
     }
 
     @Test
-    fun testToJson() {
-        val listData = fromJson(PhotoListItem.serializer().list, jsonData)
+    fun testParseJson() {
+        val listData = fromJson(PhotoListItem.serializer().list, jsonData, emptyList())
         assert(listData.isNotEmpty())
     }
 
     @Test
-    fun testFromJson() {
+    fun testStringify() {
         val encoded = toJson(PhotoListItem.serializer().list, listObjects)
-        assert(encoded.isNotEmpty())
+        assert(encoded != null)
     }
 
+    @Test
+    fun testStringifyWithNull() {
+        val encoded = toJson(PhotoListItem.serializer().list, null)
+        assert(encoded == null)
+    }
 
-    private fun readJsonFromResource(): String {
-        val classLoader = javaClass.classLoader
+    @Test
+    fun testParseJsonWithEmpty() {
+        val empty = emptyList<PhotoListItem>()
+        val encoded = fromJson(PhotoListItem.serializer().list, "", empty)
+        assert(encoded == empty)
+    }
 
-        classLoader.getResourceAsStream("ListOfPhotos.json")!!.use { inputStream ->
-            val reader = BufferedReader(InputStreamReader(inputStream))
-
-            val strBuilder = StringBuilder()
-
-            reader.lines().forEach {
-                strBuilder.append(it)
-            }
-
-            reader.close()
-
-            return strBuilder.toString()
-        }
+    @Test
+    fun testParseJsonWithNull() {
+        val empty = emptyList<PhotoListItem>()
+        val encoded = fromJson(PhotoListItem.serializer().list, null, empty)
+        assert(encoded == empty)
     }
 }
