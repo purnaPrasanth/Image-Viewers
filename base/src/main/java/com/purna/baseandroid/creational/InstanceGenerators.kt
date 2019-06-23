@@ -18,5 +18,4 @@ class single<T>(generatingBlock: () -> T) : BaseGenerator<T> {
 
 class factory<T>(val generatingBlock: () -> T) : BaseGenerator<T> {
     override fun getInstance() = generatingBlock()
-
 }

@@ -1,8 +1,6 @@
 package com.purna.httpclient.connection
 
-import com.purna.httpclient.exception.HttpException
 import com.purna.httpclient.exception.ICodeToExceptionMapper
-import com.purna.httpclient.exception.UnAuthorizedException
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
