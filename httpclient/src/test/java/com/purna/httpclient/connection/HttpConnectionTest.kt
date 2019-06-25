@@ -12,6 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import java.net.SocketTimeoutException
+import java.net.URL
 
 @RunWith(JUnit4::class)
 class HttpConnectionTest {
@@ -59,7 +60,7 @@ class HttpConnectionTest {
     }
 
     @Test
-    fun testSocketTimeOut() {
+    fun testReadTimeout() {
         mockWebServer.enqueue(
             MockResponse().setBody("ABC").setResponseCode(200).clearHeaders().addHeader("Content-Length: 4")
         )
@@ -67,6 +68,22 @@ class HttpConnectionTest {
         try {
             val url = mockWebServer.url("photos")
             httpConnection.get(url.url())
+            assert(false)
+        } catch (exception: Exception) {
+            assert(exception is SocketTimeoutException)
+        }
+    }
+
+    @Test
+    fun testConnectTimeOut() {
+        val tempHttpClient = HttpConnection(
+            readTimeOut = 3000,
+            connectTimeOut = 3000,
+            exceptionMapper = DefaultExceptionMapper()
+        )
+
+        try {
+            tempHttpClient.get(URL("https://www.google.com:81"))
             assert(false)
         } catch (exception: Exception) {
             assert(exception is SocketTimeoutException)
