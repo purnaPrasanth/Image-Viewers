@@ -10,13 +10,16 @@ class ImageViewerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
+        _instance = this
     }
 
     companion object {
-        private lateinit var instance: ImageViewerApplication
+        private lateinit var _instance: ImageViewerApplication
+
+        val application: ImageViewerApplication
+            get() = _instance
 
         val applicationContext: Context
-            get() = instance
+            get() = _instance
     }
 }

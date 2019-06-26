@@ -26,12 +26,15 @@ abstract class BaseActivity<BINDING : ViewDataBinding>(@LayoutRes val layoutId: 
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)
         initUI()
+        setListeners()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         job.cancel()
     }
+
+    abstract fun setListeners()
 
     abstract fun initUI()
 }
