@@ -21,7 +21,7 @@ This project makes use of
 
 [Back To The Top](#read-me-template)
 
-##Modules
+## Modules
 
 ### HTTPClient
 A simple Http client which uses Java's In-built URLConnection for Making Http Calls
@@ -31,7 +31,7 @@ A simple Image Loader Module which user [HTTPClient](#HTTPClient) for fetching I
 
 [Back To The Top](#read-me-template)
 
-## Getting Started
+### Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -45,12 +45,12 @@ Android Studio
 
 [Back To The Top](#read-me-template)
 
-## Running the tests
+### Running the tests
 
 To Run Tests Run the Gradle Tasks with the following command
 
 ```
-on a MAC - ./gradlew test
+./gradlew test
 ```
 [Back To The Top](#read-me-template)
 
@@ -63,6 +63,6 @@ on a MAC - ./gradlew test
 
 ## Author Info
 
-* **Purna** - *Initial work* - [Github](https://github.com/purnaPrasanth)
+* **Purna** - [Github](https://github.com/purnaPrasanth)
 
 [Back To The Top](#read-me-template)
