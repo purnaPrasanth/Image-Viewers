@@ -4,7 +4,7 @@ import com.purna.httpclient.HttpClient
 import com.purna.httpclient.exception.BadRequestException
 import com.purna.httpclient.exception.HttpException
 import com.purna.httpclient.exception.UnAuthorizedException
-import com.purna.unsplashdatasource.data.PhotoListItem
+import com.purna.unsplashdatasource.data.UnSplashImageListModel
 import com.purna.unsplashdatasource.utils.readJsonFromResource
 import kotlinx.coroutines.*
 import kotlinx.serialization.list
@@ -78,7 +78,7 @@ class UnSplashImageListServiceTest : CoroutineScope {
 
         runBlocking {
             val first = unsplashImageListService.getPhotoUrls(0, 30)
-            val actualData = fromJson(PhotoListItem.serializer().list, jsonData, emptyList())
+            val actualData = fromJson(UnSplashImageListModel.serializer().list, jsonData, emptyList())
             first.forEachIndexed { index, photoListItem ->
                 if (actualData[index].id != photoListItem.id) assert(false)
             }

@@ -1,7 +1,7 @@
 package com.purna.unsplashdatasource
 
-import com.purna.unsplashdatasource.data.ImageUrls
-import com.purna.unsplashdatasource.data.PhotoListItem
+import com.purna.unsplashdatasource.data.UnSplashImageUrls
+import com.purna.unsplashdatasource.data.UnSplashImageListModel
 import com.purna.unsplashdatasource.utils.readJsonFromResource
 import kotlinx.serialization.list
 import org.junit.Before
@@ -16,15 +16,15 @@ import org.junit.runners.JUnit4
 class SerializationHelperTest {
 
     lateinit var jsonData: String
-    lateinit var listObjects: List<PhotoListItem>
+    lateinit var listObjects: List<UnSplashImageListModel>
 
     @Before
     fun before() {
         jsonData = readJsonFromResource(javaClass)
         listObjects = (1..20).map {
-            PhotoListItem(
+            UnSplashImageListModel(
                 id = "abcd",
-                urls = ImageUrls(
+                urls = UnSplashImageUrls(
                     raw = "https://images.unsplash.com/photo-1558980394-34764db076b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjIzNTU2fQ",
                     full = "https://images.unsplash.com/photo-1558980394-34764db076b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjIzNTU2fQ",
                     regular = "https://images.unsplash.com/photo-1558980394-34764db076b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjIzNTU2fQ",
@@ -37,33 +37,33 @@ class SerializationHelperTest {
 
     @Test
     fun testParseJson() {
-        val listData = fromJson(PhotoListItem.serializer().list, jsonData, emptyList())
+        val listData = fromJson(UnSplashImageListModel.serializer().list, jsonData, emptyList())
         assert(listData.isNotEmpty())
     }
 
     @Test
     fun testStringify() {
-        val encoded = toJson(PhotoListItem.serializer().list, listObjects)
+        val encoded = toJson(UnSplashImageListModel.serializer().list, listObjects)
         assert(encoded != null)
     }
 
     @Test
     fun testStringifyWithNull() {
-        val encoded = toJson(PhotoListItem.serializer().list, null)
+        val encoded = toJson(UnSplashImageListModel.serializer().list, null)
         assert(encoded == null)
     }
 
     @Test
     fun testParseJsonWithEmpty() {
-        val empty = emptyList<PhotoListItem>()
-        val encoded = fromJson(PhotoListItem.serializer().list, "", empty)
+        val empty = emptyList<UnSplashImageListModel>()
+        val encoded = fromJson(UnSplashImageListModel.serializer().list, "", empty)
         assert(encoded == empty)
     }
 
     @Test
     fun testParseJsonWithNull() {
-        val empty = emptyList<PhotoListItem>()
-        val encoded = fromJson(PhotoListItem.serializer().list, null, empty)
+        val empty = emptyList<UnSplashImageListModel>()
+        val encoded = fromJson(UnSplashImageListModel.serializer().list, null, empty)
         assert(encoded == empty)
     }
 }

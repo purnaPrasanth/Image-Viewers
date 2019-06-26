@@ -1,5 +1,9 @@
 package com.purna.httpclient.exception
 
+/**
+ * Default Implementation of [ICodeToExceptionMapper]
+ */
+
 class DefaultExceptionMapper : ICodeToExceptionMapper {
     override fun mapCodeToException(code: Int): HttpException? {
         return when (code) {

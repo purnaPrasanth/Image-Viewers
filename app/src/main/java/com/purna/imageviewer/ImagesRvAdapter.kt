@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 /**
  * Created by Purna on 2019-06-21 as a part of Image-Viewers
  **/
+
+// RV Adapter for List of Images
+
 class ImagesRvAdapter(context: Context) :
     SingleTypeBaseRvAdapter<ItemListImageBinding, ImageListEntity>(context, R.layout.item_list_image) {
     override fun onBindViewHolder(binding: ItemListImageBinding, position: Int) {

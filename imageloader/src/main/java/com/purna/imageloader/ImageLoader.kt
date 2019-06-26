@@ -26,6 +26,9 @@ class ImageLoader(
 ) {
     private val mapImages = Collections.synchronizedMap(WeakHashMap<ImageView, String>())
 
+    /**
+     * Load Image Into an [ImageView]
+     */
     suspend fun loadImage(url: String, imageView: ImageView) = coroutineScope {
         withContext(dispatchers.ioDispatcher) {
             mapImages[imageView] = url
@@ -61,9 +64,15 @@ class ImageLoader(
         }
     }
 
+    /**
+     * Load Image from url
+     */
     private suspend fun loadImage(url: String): Bitmap? = coroutineScope {
+
+        // Check for Image in DiskCache
         val diskCacheCopy = diskCache[url]
 
+        // If Found Return It Copy From Disk Cache
         if (diskCacheCopy != null) {
             return@coroutineScope diskCacheCopy
         }
@@ -71,12 +80,19 @@ class ImageLoader(
         return@coroutineScope loadImage(url, inputStream)
     }
 
+    /**
+     * Convert an [InputStream] into a Bitmap
+     */
     private suspend fun loadImage(url: String, inputStream: InputStream): Bitmap = coroutineScope {
         val bitmap = BitmapFactory.decodeStream(inputStream)
+        // store the bitmap in disk cache
         diskCache.put(url, bitmap)
         return@coroutineScope bitmap
     }
 
+    /**
+     * Check if [ImageView] is used with a different url
+     */
     private fun imageViewReused(imageItem: ImageItem): Boolean {
         val tag = mapImages[imageItem.imageView]
         return tag == null || tag != imageItem.url

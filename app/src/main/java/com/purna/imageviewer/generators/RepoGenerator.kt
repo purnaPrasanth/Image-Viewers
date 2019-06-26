@@ -13,6 +13,10 @@ import com.purna.unsplashdatasource.UnsplashImageListService
  * Created by Purna on 2019-06-22 as a part of Image-Viewers
  **/
 
+/**
+ * Genrators for Repo instances
+ */
+
 val networkRunner: BaseGenerator<NetworkCallRunner> = single {
     NetworkCallRunner()
 }

@@ -11,6 +11,10 @@ import com.purna.imageviewer.ImageViewerApplication
  * Created by Purna on 2019-06-22 as a part of Image-Viewers
  **/
 
+/**
+ * Genrators for Network Layer instances
+ */
+
 val httpClient: BaseGenerator<HttpClient> = single {
     HttpClient.HttpClientBuilder(
         "https://api.unsplash.com/",

@@ -1,7 +1,6 @@
 package com.purna.imageviewer
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +18,13 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  * Created by Purna on 2019-06-26 as a part of Image-Viewers
  **/
+
+/**
+ * ViewModel for List of Images
+ * @property listOFImages Observable List of Images
+ * @property fetchNextPage to fetch Next Page of Images
+ */
+
 class ImageListViewModel(appDispatchers: Dispatchers, application: Application) :
     BaseViewModel(appDispatchers, application) {
 
@@ -27,8 +33,14 @@ class ImageListViewModel(appDispatchers: Dispatchers, application: Application) 
     val listOFImages: LiveData<List<ImageListEntity>>
         get() = _listOfImages
 
+    /**
+     * keep track of current page
+     */
     private val currentPage = AtomicInteger(0)
 
+    /**
+     * to prevent multiple API calls for the same page
+     */
     private val isLoading = AtomicBoolean(false)
 
     init {
@@ -43,13 +55,6 @@ class ImageListViewModel(appDispatchers: Dispatchers, application: Application) 
                         val existingList = mutableListOf<ImageListEntity>().apply {
                             addAll(listOFImages.value.orEmpty())
                             addAll(result.data)
-                        }
-                        val map = mutableSetOf<String>()
-                        existingList.forEach {
-                            if (map.contains(it.id)) {
-                                Log.d("ImageListViewModel", it.imageUrl)
-                            }
-                            map.add(it.id)
                         }
                         _listOfImages.postValue(existingList)
                         currentPage.set(page)

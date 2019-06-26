@@ -10,6 +10,11 @@ import java.util.concurrent.TimeUnit
  * Created by Purna on 2019-06-21 as a part of Image-Viewers
  **/
 
+/**
+ * Executor for IO Operational tasks
+ */
+
+
 class IoExecutor : AppExecutor {
     override val executor: Executor
         get() = _executor

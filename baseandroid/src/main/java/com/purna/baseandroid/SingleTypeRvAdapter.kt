@@ -16,9 +16,19 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by Purna on 2019-06-21 as a part of Image-Viewers
  **/
 
+/**
+ * A Handy RecyclerView Adapter for the case of Single ViewHolder Type
+ * This class greatly reduces the boiler plate code for a [RecyclerView.Adapter] with single type of [RecyclerView.ViewHolder]
+ * @param BINDING the of view binding that this [RecyclerView.Adapter] uses
+ * @param layoutId the layout id for creating ViewHolder in [onCreateViewHolder]
+ *
+ * This uses [AsyncListDiffer] for calculating changes between successive lists give to this adapter in [setData]
+ * @property onItemClickListener listener for item clicks
+ * @property onItemLongClickListener listener for item long clicks
+ */
+
 abstract class SingleTypeBaseRvAdapter<BINDING : ViewDataBinding, DATA>(val mContext: Context, @LayoutRes val layoutId: Int) :
     RecyclerView.Adapter<BaseHolder<BINDING>>() {
-    protected val TAG: String = javaClass.simpleName
     var onItemClickListener: AdapterView.OnItemClickListener? = null
     var onItemLongClickListener: AdapterView.OnItemLongClickListener? = null
 
@@ -69,8 +79,21 @@ abstract class SingleTypeBaseRvAdapter<BINDING : ViewDataBinding, DATA>(val mCon
 
     override fun getItemCount() = asyncDiffer.currentList.size
 
+    /**
+     * to bind data to the view [binding]
+     */
     protected abstract fun onBindViewHolder(binding: BINDING, position: Int)
+
+    /**
+     * method to see if too items are same
+     * useful for [notifyItemInserted] or [notifyItemRemoved] types notifier
+     */
     protected abstract fun areItemsSame(oldItem: DATA, newItem: DATA): Boolean
+
+    /**
+     * method to see if too items have same content
+     * useful for [notifyItemChanged] types notifier
+     */
     protected abstract fun areContentsSame(oldItem: DATA, newItem: DATA): Boolean
 }
 

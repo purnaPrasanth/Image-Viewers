@@ -13,13 +13,26 @@ import java.net.UnknownServiceException
 /**
  * Created by Purna on 2019-06-22 as a part of Image-Viewers
  **/
+
+/**
+ * Connection Class for HttpConnections
+ * @param readTimeOut set the time out for Reading content
+ * @param connectTimeOut set the time out for making a Http Connecting
+ * @param exceptionMapper [ICodeToExceptionMapper] for Mapping Response Codes to HttpException
+ */
+
 class HttpConnection(
     private val readTimeOut: Int,
     private val connectTimeOut: Int,
     private val exceptionMapper: ICodeToExceptionMapper
-) : IHttpConnection {
+) {
 
-    override suspend fun get(url: URL): String {
+    /**
+     * make a GET request
+     * @param url [URL] to be called
+     * @return The resulting [String] from a Network Call
+     */
+    suspend fun get(url: URL): String {
         val con = url.openConnection() as HttpURLConnection
 
         con.requestMethod = "GET"
@@ -73,7 +86,12 @@ class HttpConnection(
         }
     }
 
-    override suspend fun getStream(url: URL): InputStream {
+    /**
+     * make a GET request
+     * @param url [URL] to be called
+     * @return The resulting [InputStream] from a Network Call
+     */
+    suspend fun getStream(url: URL): InputStream {
         val con = url.openConnection() as HttpURLConnection
 
         con.requestMethod = "GET"
