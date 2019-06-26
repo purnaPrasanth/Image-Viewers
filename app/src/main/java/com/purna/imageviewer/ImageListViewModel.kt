@@ -1,6 +1,7 @@
 package com.purna.imageviewer
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,17 +32,24 @@ class ImageListViewModel(appDispatchers: Dispatchers, application: Application) 
     private val isLoading = AtomicBoolean(false)
 
     init {
-        getItems(0, 30)
+        fetchNextPage()
     }
 
     private fun getItems(page: Int, perPage: Int) {
         if (!isLoading.getAndSet(true)) {
-            launch(appDispatchers.ioDispatcher) {
+            launch(appDispatchers.mainDispatcher) {
                 when (val result = imageListRepo.getInstance().getImageList(page, perPage)) {
                     is Success -> {
                         val existingList = mutableListOf<ImageListEntity>().apply {
                             addAll(listOFImages.value.orEmpty())
                             addAll(result.data)
+                        }
+                        val map = mutableSetOf<String>()
+                        existingList.forEach {
+                            if (map.contains(it.id)) {
+                                Log.d("ImageListViewModel", it.imageUrl)
+                            }
+                            map.add(it.id)
                         }
                         _listOfImages.postValue(existingList)
                         currentPage.set(page)

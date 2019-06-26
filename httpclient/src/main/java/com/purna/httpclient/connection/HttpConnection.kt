@@ -19,7 +19,7 @@ class HttpConnection(
     private val exceptionMapper: ICodeToExceptionMapper
 ) : IHttpConnection {
 
-    override fun get(url: URL): String {
+    override suspend fun get(url: URL): String {
         val con = url.openConnection() as HttpURLConnection
 
         con.requestMethod = "GET"
@@ -73,7 +73,7 @@ class HttpConnection(
         }
     }
 
-    override fun getStream(url: URL): InputStream {
+    override suspend fun getStream(url: URL): InputStream {
         val con = url.openConnection() as HttpURLConnection
 
         con.requestMethod = "GET"

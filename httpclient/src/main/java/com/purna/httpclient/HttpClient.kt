@@ -21,16 +21,12 @@ class HttpClient constructor(
 ) {
 
     suspend fun httpGet(relativePath: String, getParams: () -> List<Pair<String, String>>) = coroutineScope {
-        withContext(dispatchers.ioDispatcher) {
-            connection.get(URL(requestBuilder.getCompleteEndPoint(relativePath, getParams())))
-        }
+        connection.get(URL(requestBuilder.getCompleteEndPoint(relativePath, getParams())))
     }
 
     suspend fun httpGet(getParams: () -> List<Pair<String, String>>) = httpGet("", getParams)
 
-    suspend fun httpGet(completeUrl: String): InputStream = withContext(dispatchers.ioDispatcher) {
-        connection.getStream(URL(completeUrl))
-    }
+    suspend fun httpGet(completeUrl: String): InputStream = connection.getStream(URL(completeUrl))
 
     class HttpClientBuilder(
         val baseUrl: String,

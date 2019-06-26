@@ -16,7 +16,7 @@ class IoExecutor : AppExecutor {
 
     private val _executor = ThreadPoolExecutor(
         0,
-        Integer.MAX_VALUE,
+        10,
         15,
         TimeUnit.SECONDS,
         SynchronousQueue<Runnable>(),

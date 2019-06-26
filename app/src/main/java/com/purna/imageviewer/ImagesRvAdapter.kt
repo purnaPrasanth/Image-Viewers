@@ -1,6 +1,7 @@
 package com.purna.imageviewer
 
 import android.content.Context
+import com.purna.baseandroid.BaseHolder
 import com.purna.baseandroid.SingleTypeBaseRvAdapter
 import com.purna.data.entity.ImageListEntity
 import com.purna.imageviewer.databinding.ItemListImageBinding
@@ -24,5 +25,10 @@ class ImagesRvAdapter(context: Context) :
 
     override fun areContentsSame(oldItem: ImageListEntity, newItem: ImageListEntity) =
         oldItem.imageUrl == newItem.imageUrl
+
+    override fun onViewRecycled(holder: BaseHolder<ItemListImageBinding>) {
+        super.onViewRecycled(holder)
+        holder.binding().image.setImageBitmap(null)
+    }
 
 }

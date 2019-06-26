@@ -13,8 +13,6 @@ class ImagesListRepo(
     private val dispatchers: Dispatchers
 ) {
     suspend fun getImageList(page: Int, perPage: Int) = coroutineScope {
-        withContext(dispatchers.ioDispatcher) {
             unsplashDataSource.getImageList(page, perPage)
-        }
     }
 }
