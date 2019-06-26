@@ -15,6 +15,6 @@ import com.purna.unsplashdatasource.data.UnSplashImageListModel
 class UnsplashImageListToImageEntity : Mapper<UnSplashImageListModel, ImageListEntity> {
     override suspend fun map(from: UnSplashImageListModel) = ImageListEntity(
         id = from.id,
-        imageUrl = from.urls.regular
+        imageUrl = from.urls.small
     )
 }
