@@ -4,10 +4,10 @@ An Android App To View Images from Multiple Source(Currently from UnSplash). Wri
 
 ### Table of Contents
 
-- [Architecture](#Architecture)
-- [Modules](#Modules)
-- [Getting Started](#Getting Started)
-- [Running the tests](#Running the tests)
+- [Architecture](#architecture)
+- [Modules](#modules)
+- [Getting Started](#getting-started)
+- [Running the tests](#running-the-tests)
 - [References](#reference)
 - [Author Info](#author-info)
 
@@ -15,8 +15,9 @@ An Android App To View Images from Multiple Source(Currently from UnSplash). Wri
 
 This Project follows multi module MVVM Architecture with clear separation of concerns. Clean Architecture Principles were followed with the use of [Android Architecture Components](https://developer.android.com/topic/libraries/architecture)
 This project makes use of
-*[Data Binding](https://developer.android.com/topic/libraries/data-binding) - For View Binding
-*[Co Routines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For Asynchronous Programming
+
+* [Data Binding](https://developer.android.com/topic/libraries/data-binding) - For View Binding
+* [Co Routines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For Asynchronous Programming
 * [Kotlix-Serilaization](https://github.com/Kotlin/kotlinx.serialization) - For Serialization
 
 [Back To The Top](#read-me-template)
