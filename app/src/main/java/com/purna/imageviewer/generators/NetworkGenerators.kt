@@ -4,6 +4,8 @@ import com.purna.base.creational.BaseGenerator
 import com.purna.base.creational.single
 import com.purna.httpclient.HttpClient
 import com.purna.imageloader.ImageLoader
+import com.purna.imageloader.ImageLoaderBuilder
+import com.purna.imageviewer.ImageViewerApplication
 
 /**
  * Created by Purna on 2019-06-22 as a part of Image-Viewers
@@ -19,8 +21,9 @@ val httpClient: BaseGenerator<HttpClient> = single {
 }
 
 val imageLoader: BaseGenerator<ImageLoader> = single {
-    ImageLoader(
-        httpClient = httpClient.getInstance(),
-        dispatchers = appDispatchersProvider.getInstance()
-    )
+    ImageLoaderBuilder(
+        ImageViewerApplication.applicationContext,
+        appDispatchersProvider.getInstance(),
+        httpClient.getInstance()
+    ).build()
 }
