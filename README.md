@@ -20,8 +20,6 @@ This project makes use of
 * [Co Routines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For Asynchronous Programming
 * [Kotlix-Serilaization](https://github.com/Kotlin/kotlinx.serialization) - For Serialization
 
-[Back To The Top](#read-me-template)
-
 ## Modules
 
 ### HTTPClient
@@ -29,8 +27,6 @@ A simple Http client which uses Java's In-built URLConnection for Making Http Ca
 
 ### Image Loader
 A simple Image Loader Module which user [HTTPClient](#HTTPClient) for fetching Images with basic Disk as well as Memory Caching Features.
-
-[Back To The Top](#read-me-template)
 
 ### Getting Started
 
@@ -44,8 +40,6 @@ What things you need to install the software and how to install them
 Android Studio
 ```
 
-[Back To The Top](#read-me-template)
-
 ### Running the tests
 
 To Run Tests Run the Gradle Tasks with the following command
@@ -53,7 +47,6 @@ To Run Tests Run the Gradle Tasks with the following command
 ```
 ./gradlew test
 ```
-[Back To The Top](#read-me-template)
 
 ## References
 
@@ -64,5 +57,3 @@ To Run Tests Run the Gradle Tasks with the following command
 ## Author Info
 
 * **Purna** - [Github](https://github.com/purnaPrasanth)
-
-[Back To The Top](#table-of-content)
