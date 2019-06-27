@@ -7,14 +7,21 @@ import kotlinx.serialization.Serializable
  * Created by Purna on 2019-06-21 as a part of Image-Viewers
  **/
 
-@Serializable
-data class PhotoListItem(
-    @SerialName("id") val id: String,
-    @SerialName("urls") val urls: ImageUrls
-)
+/**
+ * Image Data Model for UnSplashImageList
+ */
 
 @Serializable
-data class ImageUrls(
+data class UnSplashImageListModel(
+    @SerialName("id") val id: String,
+    @SerialName("urls") val urls: UnSplashImageUrls
+)
+
+/**
+ * Data Model for UnSPlash Image Url
+ */
+@Serializable
+data class UnSplashImageUrls(
     @SerialName("raw") val raw: String,
     @SerialName("full") val full: String,
     @SerialName("regular") val regular: String,

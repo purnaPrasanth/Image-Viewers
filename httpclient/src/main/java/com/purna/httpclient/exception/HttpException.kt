@@ -1,5 +1,9 @@
 package com.purna.httpclient.exception
 
+/**
+ * Most Common Types of Http Exceptions
+ */
+
 sealed class HttpException(val errorCode: Int, val requestedUrl: String) :
     Exception("Error $errorCode: While calling $requestedUrl") {
     abstract fun copy(code: Int? = null, url: String? = null): HttpException

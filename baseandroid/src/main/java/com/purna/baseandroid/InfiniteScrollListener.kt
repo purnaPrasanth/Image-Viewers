@@ -6,6 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by Purna on 2019-06-22 as a part of Image-Viewers
  **/
+
+/**
+ * Infinite Scroll Listener for introducing pagination into [RecyclerView]
+ *
+ * @param layoutManager Layout Manager used with recycler view
+ */
+
 abstract class InfiniteScrollListener(private val layoutManager: LinearLayoutManager) :
     RecyclerView.OnScrollListener() {
 
@@ -25,5 +32,8 @@ abstract class InfiniteScrollListener(private val layoutManager: LinearLayoutMan
         }
     }
 
+    /**
+     * callback to request more items into the [RecyclerView]
+     */
     abstract fun loadMoreItems()
 }

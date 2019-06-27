@@ -14,6 +14,10 @@ import kotlinx.coroutines.asCoroutineDispatcher
  * Created by Purna on 2019-06-21 as a part of Image-Viewers
  **/
 
+/**
+ * Genrators for [AppExecutor] or [Executors] or [Dispatchers] instances
+ */
+
 val commonExecutorGenerator: BaseGenerator<AppExecutor> = single { CommonExecutor() }
 
 val ioExecutorGenerator: BaseGenerator<AppExecutor> = single { IoExecutor() }

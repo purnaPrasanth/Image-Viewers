@@ -6,8 +6,18 @@ import java.nio.charset.Charset
 /**
  * Created by Purna on 2019-06-22 as a part of Image-Viewers
  **/
+
+/**
+ * Helper Class for building params
+ * @param charsetEncoding Encoding to to be used for params
+ */
+
 class ParamsBuilder(private val charsetEncoding: Charset = Charsets.UTF_8) {
 
+    /**
+     * Buidling params String from List of Params
+     * @param params Params given as a List of [Pair]
+     */
     fun buildParams(params: List<Pair<String, String>>): String {
         if (params.isEmpty()) return ""
         val stringBuilder = StringBuilder("?")

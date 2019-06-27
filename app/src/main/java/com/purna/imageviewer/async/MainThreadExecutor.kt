@@ -7,6 +7,11 @@ import java.util.concurrent.Executor
 /**
  * Created by Purna on 2019-06-21 as a part of Image-Viewers
  **/
+
+/**
+ * Executor for Main Thread Tasks
+ */
+
 class MainThreadExecutor : AppExecutor {
     override val executor: Executor
         get() = _executor
