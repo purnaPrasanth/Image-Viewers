@@ -7,6 +7,7 @@ import com.purna.data.datasource.imagelist.ImageListDataSource
 import com.purna.data.datasource.imagelist.UnsplashImageListDataSource
 import com.purna.data.mappers.imagelist.UnsplashImageListToImageEntity
 import com.purna.data.repo.ImagesListRepo
+import com.purna.unsplashdatasource.UnSplashRetrofitProvider
 import com.purna.unsplashdatasource.UnsplashImageListService
 
 /**
@@ -25,13 +26,20 @@ val unsplashImageListToImageEntity: BaseGenerator<UnsplashImageListToImageEntity
     UnsplashImageListToImageEntity()
 }
 
-private val unsplashService: BaseGenerator<UnsplashImageListService> = single {
-    UnsplashImageListService(httpClient.getInstance(), appDispatchersProvider.getInstance())
+private val unSplashRetrofitProvider: BaseGenerator<UnSplashRetrofitProvider> = single {
+    UnSplashRetrofitProvider(okHttpClient.getInstance())
+}
+
+private val unsplashDataService: BaseGenerator<UnsplashImageListService> = single {
+    UnsplashImageListService(
+        unSplashRetrofitProvider.getInstance().unsplashImageListService,
+        appDispatchersProvider.getInstance()
+    )
 }
 
 private val unsplashDataSource: BaseGenerator<ImageListDataSource> = single {
     UnsplashImageListDataSource(
-        unsplashService.getInstance(),
+        unsplashDataService.getInstance(),
         networkRunner.getInstance(),
         unsplashImageListToImageEntity.getInstance()
     )

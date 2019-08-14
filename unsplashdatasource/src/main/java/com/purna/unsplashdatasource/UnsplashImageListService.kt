@@ -3,6 +3,7 @@ package com.purna.unsplashdatasource
 import com.purna.base.Dispatchers
 import com.purna.httpclient.HttpClient
 import com.purna.unsplashdatasource.data.UnSplashImageListModel
+import com.purna.unsplashdatasource.services.UnSplashListServices
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.list
@@ -15,19 +16,12 @@ import kotlinx.serialization.list
  * Service to get List Of Images from UnSplash API
  */
 class UnsplashImageListService(
-    private val httpClient: HttpClient,
+    private val imageListService: UnSplashListServices,
     private val dispatchers: Dispatchers
 ) {
     suspend fun getPhotoUrls(page: Int, perPage: Int): List<UnSplashImageListModel> = coroutineScope {
         withContext(dispatchers.ioDispatcher) {
-            val data = httpClient.httpGet(relativePath = "photos") {
-                listOf(
-                    Pair("page", page.toString()),
-                    Pair("per_page", perPage.toString()),
-                    Pair("client_id", clientId)
-                )
-            }
-            fromJson(UnSplashImageListModel.serializer().list, data, emptyList())
+            imageListService.getPhotos(page, perPage).await()
         }
     }
 }

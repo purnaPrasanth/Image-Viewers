@@ -2,6 +2,7 @@ package com.purna.imageviewer
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.purna.baseandroid.BaseActivity
 import com.purna.baseandroid.InfiniteScrollListener
@@ -18,7 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         ).get(ImageListViewModel::class.java)
     }
 
-    private val layoutManager by lazy { LinearLayoutManager(this) }
+    private val layoutManager by lazy { GridLayoutManager(this, 3) }
 
     private val paginationScrollListener by lazy {
         object : InfiniteScrollListener(layoutManager) {

@@ -70,7 +70,7 @@ class ImageListViewModel(appDispatchers: Dispatchers, application: Application) 
     }
 
     fun fetchNextPage() {
-        getItems(currentPage.get() + 1, 30)
+        getItems(currentPage.get() + 1, 60)
     }
 }
 
